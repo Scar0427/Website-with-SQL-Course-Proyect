@@ -1,0 +1,78 @@
+*{
+    margin: 0;
+}
+
+#start{
+    position: absolute;
+    background-color: rgba(217, 165, 32, 1);
+    height: 100%;
+    width: 100%;
+    animation: start 1s ease-in-out 2s forwards;
+}
+
+#logo{
+        display: block;
+        transform: translateX(70%);
+        /**margin-left: auto;
+        margin-right: auto;*/
+        width: 40%;
+        margin-bottom: 2em;
+    animation: startLogo 1s ease-in-out 2s forwards;
+}
+
+#university{
+    text-align: center;
+    font-size: 6em;
+    animation: startUniversityName 1s ease-in-out 2s forwards;
+}
+
+@keyframes startLogo{
+    from{
+        display: block;
+        transform: translateX(70%);
+        /**margin-left: auto;
+        margin-right: auto;*/
+        width: 40%;
+        margin-bottom: 2em;
+    }
+
+    to{
+        transform: translateX(0em);
+        transform: translateY(0em);
+        /*margin-right: none;*/
+        /*margin-top: 1em;*/
+        display: block;
+        margin-left: 1em;
+        margin-right: none;
+        margin-top: 1em;
+        width: 100px;
+    }
+}
+
+@keyframes startUniversityName {
+    from{
+        text-align: center;
+        font-size: 6em;
+    }
+
+    to{
+        display: block;
+        text-align: left;
+        font-size: 1em;
+    }
+}
+
+@keyframes start {
+    from{
+        background-color: rgba(217, 165, 32, 1);
+        height: 100%;
+        width: 100%;
+    }
+
+    to{
+        position: static;
+        width: auto;
+        height: auto;
+        background-color: rgba(217, 165, 32, 0);
+    }
+}
