@@ -3,13 +3,97 @@
     <head>
         <title>Universidad del Monte</title>
         <link rel="stylesheet" href="styles/style.css">
+        <link rel="icon" href="img/UniversidadDelMonte.png">
         <meta charset="utf8">
+        <!--Teñido de la barra superior de Safari según modo claro o oscuro-->}
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffe7aa">
+        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#8b6400">
     </head>
     <body>
-        <div id="start">
-            <img src="img/UniversidadDelMonte.png" id="logo"> 
-            <h1 id="university">Universidad del Monte</h1>
+        <header>
+            <div id="start">
+                <img src="img/UniversidadDelMonte.png" id="logo">
+                <h1 id="university">Universidad del Monte</h1>
+            </div>
+            
+            <ul id="upButtons">
+                <a href="#inicio"><li>Inicio</li></a>
+                <a href="#"><li>Conoce la Universidad</li></a>
+                <a href="#"><li>Oferta educativa</li></a>
+                <a href="#"><li>Gaceta Universitaria</li></a>
+                <a href="login.html"><li>¿Eres alumno o profesor? Inicia sesión aquí</li></a>
+            </ul>
+        </header>
+        <div id="content">
+            <div id="inicio">
+
+                <h1>Bienvenido a la Universidad del Monte</h1>
+                <div id="section">
+                    <div>
+                        <p>
+                            La Universidad del Monte lleva más de 150 años capacitando a los mejores profesionales de los Estados Unidos Mexicanos. Durante todos estos años más de 6000 estudiantes han
+                            egresado de las últimas carreras técnológicas con la mayor demenda del mercado, y más de 4000 se han licenciado en carreras que son fundamentales para el desarrollo y avance tecnólogico
+                            de nuestro mundo.
+                        </p>
+                        <p>
+                            Nuestra universidad cuenta con un claustro de maestro de primera, compuesto por los mejores profesionales en sus respectivas áreas. De esta forma reafirmos nuestro compromiso de egresar
+                            los mejores profesionales en sus respectivas áreas.
+                        </p>
+                    </div>
+                    <img src="img/campus.jpg">
+                </div>
+                <!--Claustro de maestros ?????-->
+
+                <h1>Nuestra misión</h1>
+                <div id="section">
+                    <img src="img/graduados.jpg">
+                    <!--Misión-->
+                    <p>
+                        La Universidad del Monte tiene como misión capacitar a los mejores profesionales en sus respectivas áreas utilizando a los mejores profesores de nuestro país. También contamos con
+                        laboratorios equipados con las últimas tecnologías para darles a nuestros estudiantes la mejor preparación que puedan tener.
+                    </p>
+                </div>
+                
+                <h1>Nuestros valores</h1>
+                <div id="section">
+                    <!--Valores-->
+                    <div>
+
+                        <p>
+                            Desde hace 150 años nos hemos caracterizado debido a los altos valores de nuestros estudiantes y profesores. Estos son:
+                        </p>
+                        <ul>
+                            <li>Honestidad</li>
+                            <li>Responsabilidad</li>
+                            <li>Compromiso</li>
+                            <li>Lealtad</li>
+                            <li>Respeto</li>
+                            <li>Transparencia</li>
+                        </ul>
+                    </div>
+                    <img src="img/estudiando.jpg">
+                </div>
+
+            </div>
         </div>
-        <a href="login.html">¿Eres alumno o profesor? Inicia sesión aquí</a>
+        <footer>
+            <div id="socials">
+                <a href="https://www.twitter.com"><img src="img/twitter.png"></a>
+                <a href="https://www.facebook.com"><img src="img/facebook.png"></a>
+                <a href="https://www.youtube.com"><img src="img/youtube.png"></a>
+            </div>
+            <div id="direction">
+                <address>
+                    Avenida Monte 1324<br>León, Guanajuato<br>CP:12345
+                </address>
+            </div>
+            <div id="creator">
+                Creador por:
+                <br>
+                <b>Nombre:</b> Owen Daniel Fernández Chacóm<br>
+                <b>Grupo:</b> 5A Programación<br>
+                <b>Asignatura:</b> Desarrolla aplicaciones web con conexión a base de datos
+            </div>
+        </footer>
     </body>
 </html>

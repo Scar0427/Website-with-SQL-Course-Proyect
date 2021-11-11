@@ -1,37 +1,166 @@
+@media (prefers-color-scheme: light){
+    :root{
+        --background-color: rgb(255, 230, 168);
+        --enfatic-color: rgb(253, 206, 85);
+        --secondary-color: rgb(207, 149, 0);
+    }
+}
+
+@media (prefers-color-scheme: dark){
+    :root{
+        --background-color: rgb(139, 100, 0);
+        --enfatic-color: rgb(255, 229, 164);
+        --secondary-color: rgb(255, 199, 58);
+    }
+}
+
 *{
     margin: 0;
 }
 
+header{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color:  var(--background-color);
+}
+
 #start{
+    background-color: var(--background-color);
+    margin-top: -150px;
     position: absolute;
-    background-color: rgba(217, 165, 32, 1);
+    /*background-color: var(--background-color);*/
     height: 100%;
     width: 100%;
-    animation: start 1s ease-in-out 2s forwards;
+    animation: start 1s ease-in-out 1s forwards;
+    z-index: 300;
+    /*animation: start 0s ease-in-out 0s forwards;*/
 }
 
 #logo{
         display: block;
-        transform: translateX(70%);
-        /**margin-left: auto;
-        margin-right: auto;*/
+        transform: translateX(80%);
         width: 40%;
         margin-bottom: 2em;
-    animation: startLogo 1s ease-in-out 2s forwards;
+    /*animation: startLogo 1s ease-in 2s forwards;*/
 }
 
 #university{
     text-align: center;
     font-size: 6em;
-    animation: startUniversityName 1s ease-in-out 2s forwards;
 }
 
-@keyframes startLogo{
+#upButtons{
+    list-style: none;
+    margin-top: 150px;
+    display: flex;
+    background-color: var(--secondary-color);
+    height: 60px;
+    border-top: 5px dotted var(--enfatic-color);
+    align-items: center;
+    justify-content: center;
+}
+
+#upButtons li{
+    padding-right: 1em;
+    padding-left: 1em;
+    padding-top: 20px;
+    background-color: transparent;
+}
+
+#upButtons a:hover{
+    background-color: var(--background-color);
+    
+}
+
+#upButtons a{
+    background-color: transparent;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    height: 60px;
+    transition: 0.2s ease-in-out;
+    font-size: 1.3em;
+}
+
+/*Content*/
+#content{
+    width: 90%;
+    background-color: var(--enfatic-color);
+    text-align: justify;
+    justify-content: center;
+    margin: 0 5%;
+    padding: 2% 0;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    animation: show 0.2s ease-in-out 1s forwards;
+}
+
+#content h1{
+    text-align: center;
+    padding: 0.5em 0;
+}
+
+#content p{
+    margin: 0 2%;
+    padding: 0.2em 0;
+    font-size: 1.5em;
+}
+
+#section{
+    display: flex;
+}
+
+#section img{
+    width: 30%;
+    padding: 0 1em;
+    border-radius: 5% 25%;
+}
+
+#content li{
+    margin: 0 2%;
+    padding: 0.2em 0;
+    font-size: 1.5em;
+}
+
+/*Footer*/
+footer{
+    background-color: var(--secondary-color);
+    display: flex;
+    flex-shrink: 0;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+footer div{
+    margin: 0 5em;
+}
+#socials img{
+    height: 52px;
+    width: auto;
+    padding: 1em;
+}
+
+#direction{
+    text-align: center;
+    font-size: 25px;
+}
+
+#creator{
+    text-align: left;
+    font-size: 20px;
+    padding: 10px 0;
+}
+
+/*@keyframes startLogo{
     from{
         display: block;
-        transform: translateX(70%);
-        /**margin-left: auto;
-        margin-right: auto;*/
+        transform: translateX(80%);
         width: 40%;
         margin-bottom: 2em;
     }
@@ -39,13 +168,10 @@
     to{
         transform: translateX(0em);
         transform: translateY(0em);
-        /*margin-right: none;*/
-        /*margin-top: 1em;*/
-        display: block;
-        margin-left: 1em;
-        margin-right: none;
-        margin-top: 1em;
-        width: 100px;
+        margin: 0.2em 0 0 0.5em;
+        width: 50px;
+        height: 50px;
+        /*display: flex;
     }
 }
 
@@ -56,23 +182,40 @@
     }
 
     to{
-        display: block;
+        display: flex;
         text-align: left;
         font-size: 1em;
+        padding: 0;
     }
-}
+}*/
 
 @keyframes start {
     from{
-        background-color: rgba(217, 165, 32, 1);
+        background-color: var(--background-color);
         height: 100%;
         width: 100%;
     }
 
     to{
-        position: static;
-        width: auto;
+        /*position: static;*/
+        position: absolute;
+        transform: scale(0.15, 0.15);
+        height: 10px;
+        width: 100%;
+        /*background-color: rgba(217, 165, 32, 0);*/
+    }
+}
+
+@keyframes show {
+    from{
+        height: 0;
+        opacity: 0;
+        overflow: hidden;
+    }
+
+    to{
         height: auto;
-        background-color: rgba(217, 165, 32, 0);
+        opacity: 1;
+        overflow: visible;
     }
 }
