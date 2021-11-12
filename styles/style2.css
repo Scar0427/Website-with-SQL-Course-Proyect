@@ -1,0 +1,73 @@
+body{
+    background-color:  var(--background-color);
+}
+
+#start{
+    background-color: var(--background-color);
+    margin-top: -150px;
+    position: absolute;
+    /*background-color: var(--background-color);*/
+    height: 100%;
+    width: 100%;
+    animation: start 1s ease-in-out 1s forwards;
+    z-index: 300;
+    transform: scale(1,1);
+    /*animation: start 0s ease-in-out 0s forwards;*/
+}
+
+#logo{
+        display: block;
+        transform: translateX(80%);
+        width: 40%;
+        margin-bottom: 2em;
+    /*animation: startLogo 1s ease-in 2s forwards;*/
+}
+
+#university{
+    text-align: center;
+    font-size: 6em;
+}
+
+#content{
+    width: 90%;
+    background-color: var(--enfatic-color);
+    text-align: justify;
+    justify-content: center;
+    margin: 0 5%;
+    padding: 2% 0;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    animation: show 0.2s ease-in-out 1s forwards;
+}
+
+@keyframes start {
+    from{
+        background-color: var(--background-color);
+        height: 100%;
+        width: 100%;
+    }
+
+    to{
+        /*position: static;*/
+        position: absolute;
+        transform: scale(0.15, 0.15);
+        height: 10px;
+        width: 100%;
+        /*background-color: rgba(217, 165, 32, 0);*/
+    }
+}
+
+@keyframes show {
+    from{
+        height: 0;
+        opacity: 0;
+        overflow: hidden;
+    }
+
+    to{
+        height: auto;
+        opacity: 1;
+        overflow: visible;
+    }
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+    <head>
+        <title>Administrador | Universidad del Monte</title>
+        <link rel="stylesheet" href="styles/style.css">
+        <link rel="icon" href="img/UniversidadDelMonte.png">
+        <meta charset="utf8">
+        <!--Teñido de la barra superior de Safari según modo claro o oscuro-->
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffe7aa">
+        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#8b6400">
+    </head>
+    <body>
+        <header>
+            <div id="start">
+                <img src="img/UniversidadDelMonte.png" id="logo">
+                <h1 id="university">Universidad del Monte</h1>
+            </div>
+            
+            <ul id="upButtons">
+                <a href="#" id="AddPersonas" onclick="showAddPersonas()"><li>Añadir personas</li></a>
+                <a href='#' onclick="showAsignaturas()" id="addAsignatura"><li>Añadir Asignaturas</li></a>
+                <a href="#" onclick="showCurso()"><li>Añadir Cursos</li></a>
+                <a href='#' onclick="showPrograma()" id="addProgram"><li>Añadir Programa</li></a>
+            </ul>
+        </header>
+        <div id="content">
+            <!--Persona-->
+           <div id="personas" class="hidden">
+                <h1>Añadir personas</h1>
+                <form method="post" id="personForm">
+                    Registro de: <select id="tipo" name="tipo" onchange=""><option value="1">Alumno</option><option value="2">Maestro</option></select><br>
+                    Nombre: <input type="text" name="namePerson"><br>
+                    Apellido Paterno: <input type="text" name="apellidoP"><br>
+                    Apellido Materno: <input type="text" name="apellidoM"><br>
+                    CURP: <input type="text" maxlength="18" name="curp"><br>
+                    <input type="hidden" name="state" value="1">
+                    <div id="tel">Télefono: <input type="tel" maxlength="10" name="telefono"></div>
+                    <input type="submit" value="Registrar" name="submitPerson">
+                </form>
+           </div>
+           <!--Asignatura-->
+           <div id="asignatura" class="hidden">
+                <h1>Añadir asignatura</h1>
+                <form method="post" id="asignaturaForm">
+                    Matrícula: <input type="number" name="totalEstudiantes"><br>
+                    Nombre: <input type="text" name="nombreAsignatura"><br>
+                    CURP del maestro: <select name="curp" id="curp"></select><br>
+                    <input type="hidden" name="state" value="2">
+                    <input type="submit" value="Registrar">
+                </form>
+            </div>
+            <!--Curso-->
+            <div id="curso" class="hidden">
+                <h1>Añadir curso escolar</h1>
+                <form method="post" id="cursoForm">
+                    Año Inicio: <input type="number" name="inicio"><br>
+                    Duración del curso en meses: <input type="text" name="duracion"><br>
+                    <input type="hidden" name="state" value="3">
+                    <input type="submit" value="Registrar">
+                </form>
+            </div>
+            <!--Programa-->
+            <div id="programa" class="hidden">
+                <h1>Añadir programa (se requiere un curso y una asignatura para añadirse)</h1>
+                <form method="post" id="programForm">
+                    Asignatura: <select name="asig" id="asig"></select><br>
+                    Curso escolar: <select name="curso" id="cursoEsc"></select><br>
+                    Nombre del programa: <input type="text" name="nombre"><br>
+                    Duración en meses: <input type="number" name="duracion"><br>
+                    <input type="hidden" name="state" value="4">
+                    <input type="submit" value="Registrar">
+                </form>
+            </div>
+            <div id="responses">
+            </div>
+        </div>
+        <footer>
+            <div id="socials">
+                <a href="https://www.twitter.com"><img src="img/twitter.png"></a>
+                <a href="https://www.facebook.com"><img src="img/facebook.png"></a>
+                <a href="https://www.youtube.com"><img src="img/youtube.png"></a>
+            </div>
+            <div id="direction">
+                <address>
+                    Avenida Monte 1324<br>León, Guanajuato<br>CP:12345
+                </address>
+            </div>
+            <div id="creator">
+                Creador por:
+                <br>
+                <b>Nombre:</b> Owen Daniel Fernández Chacóm<br>
+                <b>Grupo:</b> 5A Programación<br>
+                <b>Asignatura:</b> Desarrolla aplicaciones web con conexión a base de datos
+            </div>
+        </footer>
+
+        <!--Scripts-->
+        <script src="js/jQuery.js"></script>
+        <script src="js/admin.js"></script>
+    </body>
+</html>

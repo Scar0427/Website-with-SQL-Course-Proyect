@@ -30,6 +30,14 @@
 
                 $_SESSION["userCURP"] = $loginData[3];
             }
+            else if($loginData[2] == "profesor"){
+                $json = $json = array('code' => 1, 'result'=>"Login completo", 'role'=>"profesor");
+                $_SESSION["userCURP"] = $loginData[4];
+            }
+            else{
+                $json = array('code' => 1, 'result'=>"Login completo", 'role'=>"admin");
+                $_SESSION["userCURP"] = null;
+            }
         }
         else{
             $json = array('code' => 2,'result' => "Contraseña incorrecta");

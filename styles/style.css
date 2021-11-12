@@ -28,14 +28,16 @@ body{
 }
 
 #start{
-    background-color: var(--background-color);
     margin-top: -150px;
     position: absolute;
     /*background-color: var(--background-color);*/
     height: 100%;
     width: 100%;
-    animation: start 1s ease-in-out 1s forwards;
+    /*animation: start 1s ease-in-out 1s forwards;*/
     z-index: 300;
+    transform: scale(0.15,0.15);
+    height: 10px;
+    width: 100%;
     /*animation: start 0s ease-in-out 0s forwards;*/
 }
 
@@ -93,10 +95,6 @@ body{
     justify-content: center;
     margin: 0 5%;
     padding: 2% 0;
-    height: 0;
-    opacity: 0;
-    overflow: hidden;
-    animation: show 0.2s ease-in-out 1s forwards;
 }
 
 #content h1{
@@ -189,33 +187,14 @@ footer div{
     }
 }*/
 
-@keyframes start {
-    from{
-        background-color: var(--background-color);
-        height: 100%;
-        width: 100%;
-    }
-
-    to{
-        /*position: static;*/
-        position: absolute;
-        transform: scale(0.15, 0.15);
-        height: 10px;
-        width: 100%;
-        /*background-color: rgba(217, 165, 32, 0);*/
-    }
+/*Admin Styles*/
+.hidden{
+    margin: 0;
+    height: 0;
+    overflow: hidden;
 }
 
-@keyframes show {
-    from{
-        height: 0;
-        opacity: 0;
-        overflow: hidden;
-    }
-
-    to{
-        height: auto;
-        opacity: 1;
-        overflow: visible;
-    }
+.show{
+    height: auto;
+    overflow: visible;
 }
