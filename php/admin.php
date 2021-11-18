@@ -141,7 +141,7 @@ if(mysqli_connect_error()){
             $programa = $_POST['nombre'];
             $duracion = $_POST['duracion'];
 
-            $query = "INSERT INTO programa VALUES($asignatura, '$curso', '$programa', '$duracion')";
+            $query = "INSERT INTO matricula VALUES($asignatura, '$curso', '$programa', '$duracion')";
             $result = mysqli_query($connection, $query);
 
             if($result == true){

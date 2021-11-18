@@ -20,7 +20,7 @@ $(document).ready(function(){
     $('#addAsignatura').click(e=>{
         e.preventDefault()
         $.ajax({
-            url: 'admin.php',
+            url: 'php/admin.php',
             data: {"operation": "teachers"},
             type: 'POST',
             success: function(response){
@@ -48,7 +48,7 @@ $(document).ready(function(){
         $('#cursoEsc').html("");
         $('#asig').html("");
         $.ajax({
-            url: 'admin.php',
+            url: 'php/admin.php',
             data: {"operation": "asignatura"},
             type: 'POST',
             success: function(response){
@@ -69,7 +69,7 @@ $(document).ready(function(){
         });
 
         $.ajax({
-            url: 'admin.php',
+            url: 'php/admin.php',
             data: {"operation": "curso"},
             type: 'POST',
             success: function(response2){
@@ -94,7 +94,7 @@ $(document).ready(function(){
     $('#personForm').submit(e=>{
         e.preventDefault();
         $.ajax({
-            url: 'admin.php',
+            url: 'php/admin.php',
             data: $('#personForm').serialize(),
             type: 'POST',
             success: function(response){
@@ -118,7 +118,7 @@ $(document).ready(function(){
     $('#asignaturaForm').submit(e=>{
         e.preventDefault();
         $.ajax({
-            url: 'admin.php',
+            url: 'php/admin.php',
             data: $('#asignaturaForm').serialize(),
             type: 'POST',
             success: function(response){
@@ -142,7 +142,7 @@ $(document).ready(function(){
     $('#cursoForm').submit(e=>{
         e.preventDefault();
         $.ajax({
-            url: 'admin.php',
+            url: 'php/admin.php',
             data: $('#cursoForm').serialize(),
             type: 'POST',
             success: function(response){
@@ -166,7 +166,7 @@ $(document).ready(function(){
     $('#programForm').submit(e=>{
         e.preventDefault();
         $.ajax({
-            url: 'admin.php',
+            url: 'php/admin.php',
             data: $('#programForm').serialize(),
             type: 'POST',
             success: function(response){

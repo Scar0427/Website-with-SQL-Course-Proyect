@@ -26,6 +26,7 @@
         <div id="content">
             <!--Persona-->
            <div id="personas" class="hidden">
+               <div id="formElement">
                 <h1>Añadir personas</h1>
                 <form method="post" id="personForm">
                     Registro de: <select id="tipo" name="tipo" onchange=""><option value="1">Alumno</option><option value="2">Maestro</option></select><br>
@@ -37,9 +38,11 @@
                     <div id="tel">Télefono: <input type="tel" maxlength="10" name="telefono"></div>
                     <input type="submit" value="Registrar" name="submitPerson">
                 </form>
+               </div>
            </div>
            <!--Asignatura-->
            <div id="asignatura" class="hidden">
+               <div id="formElement">
                 <h1>Añadir asignatura</h1>
                 <form method="post" id="asignaturaForm">
                     Matrícula: <input type="number" name="totalEstudiantes"><br>
@@ -48,28 +51,33 @@
                     <input type="hidden" name="state" value="2">
                     <input type="submit" value="Registrar">
                 </form>
+               </div>
             </div>
             <!--Curso-->
             <div id="curso" class="hidden">
-                <h1>Añadir curso escolar</h1>
-                <form method="post" id="cursoForm">
-                    Año Inicio: <input type="number" name="inicio"><br>
-                    Duración del curso en meses: <input type="text" name="duracion"><br>
-                    <input type="hidden" name="state" value="3">
-                    <input type="submit" value="Registrar">
-                </form>
+                <div id="formElement">
+                    <h1>Añadir curso escolar</h1>
+                    <form method="post" id="cursoForm">
+                        Año Inicio: <input type="number" name="inicio"><br>
+                        Duración del curso en meses: <input type="text" name="duracion"><br>
+                        <input type="hidden" name="state" value="3">
+                        <input type="submit" value="Registrar">
+                    </form>
+                </div>
             </div>
             <!--Programa-->
             <div id="programa" class="hidden">
-                <h1>Añadir programa (se requiere un curso y una asignatura para añadirse)</h1>
-                <form method="post" id="programForm">
-                    Asignatura: <select name="asig" id="asig"></select><br>
-                    Curso escolar: <select name="curso" id="cursoEsc"></select><br>
-                    Nombre del programa: <input type="text" name="nombre"><br>
-                    Duración en meses: <input type="number" name="duracion"><br>
-                    <input type="hidden" name="state" value="4">
-                    <input type="submit" value="Registrar">
-                </form>
+                <div id="formElement">
+                    <h1>Añadir programa (se requiere un curso y una asignatura para añadirse)</h1>
+                    <form method="post" id="programForm">
+                        Asignatura: <select name="asig" id="asig"></select><br>
+                        Curso escolar: <select name="curso" id="cursoEsc"></select><br>
+                        Nombre del programa: <input type="text" name="nombre"><br>
+                        Duración en meses: <input type="number" name="duracion"><br>
+                        <input type="hidden" name="state" value="4">
+                        <input type="submit" value="Registrar">
+                    </form>
+                </div>
             </div>
             <div id="responses">
             </div>

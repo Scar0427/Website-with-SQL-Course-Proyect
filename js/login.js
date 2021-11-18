@@ -1,10 +1,23 @@
 $(document).ready(function(){
     console.log("Working jQuery");
 
+    $.ajax({
+        url: 'php/login.php',
+        data: {'action':'start'},
+        type: 'POST',
+        success: function(response){
+            console.log(response);
+            let finalResponse = JSON.parse(response);
+            if(finalResponse.code == 2){
+                $('#errors').html(finalResponse.result);
+            }
+        }
+    })
+
     $('#login').submit(e => {
         e.preventDefault();
         $.ajax({
-            url: 'login.php', 
+            url: 'php/login.php', 
             data: $('#login').serialize(),
             type: 'POST',
             success: function(response){
@@ -13,7 +26,7 @@ $(document).ready(function(){
                     let finalResponse = JSON.parse(response);
                     if(finalResponse.code == 2){
                         console.log("Ocurrio un error durante el login");
-                        $('#container').html(finalResponse.result);
+                        $('#errors').html(finalResponse.result);
                     }
                     else{
                         console.log("Inicio de sesión exitoso");
@@ -22,11 +35,11 @@ $(document).ready(function(){
                         if(finalResponse.role == "alumno"){
                             //Abrir el sitio de los alumnos, y enviar el CURP
                             console.log("Abriendo sesión de alumno");
-                            window.open('student.php', "_self");
+                            window.open('student.html', "_self");
                         }
                         else if (finalResponse.role == "profesor"){
                             console.log("Abriendo sesión de profesor");
-                            window.open('teacher.php', "_self");
+                            window.open('teacher.html', "_self");
                         }
                         else{
                             console.log("Abriendo sesión de admin");

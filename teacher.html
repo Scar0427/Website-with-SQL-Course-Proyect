@@ -17,29 +17,23 @@
                 </div>
                 
                 <ul id="upButtons">
-                    <a href="index.html"><li>Inicio</li></a>
-                    <a href="#"><li>Conoce la Universidad</li></a>
-                    <a href="#"><li>Oferta educativa</li></a>
-                    <a href="#"><li>Gaceta Universitaria</li></a>
-                    <a href="login.html"><li>¿Eres alumno o profesor? Inicia sesión aquí</li></a>
+                    <a><li id="userName"></li></a>
+                    <a href="login.html" id="close"><li>Cerrar sesión</li></a>
                 </ul>
             </header>
         <div id="content">
-            <div id="formElement">
-                <h1>Inicio de sesión</h1>
-                <form action="" method="post" id="login">
-                    Usuario: <input type="text" name="user"> <br>
-                    Password: <input type="password" name="pass"> <br>
-                    <input type="submit" value="Iniciar sesión" name="submit">
-                    <input type="hidden" name="action" value="login">
-                </form>
-                <br>
-                <div id="errors">
-                    
-                </div>
+            <div id="misCursos" class="show">
+                
+            </div>
+
+            <div id="cursoView" class="hidden">
+                <button type="button" onclick="ReturnToCursos()">Regresar a Mis Cursos</button>
+            </div>
+            <div id="programEdit" class="hidden">
+                <button type="button" onclick="ReturnToPrograms()">Regresar a Programas</button>
+
             </div>
         </div>
-
         <footer>
             <div id="socials">
                 <a href="https://www.twitter.com"><img src="img/twitter.png"></a>
@@ -60,6 +54,6 @@
             </div>
         </footer>
         <script src="js/jQuery.js"></script>
-        <script src="js/login.js"></script>
+        <script src="js/teacher.js"></script>
     </body>
 </html>
