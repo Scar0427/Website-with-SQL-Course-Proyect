@@ -17,7 +17,7 @@
             </div>
             
             <ul id="upButtons">
-                <a href='#'><li>Gestionar Información</li></a>
+                <a href='#' onclick="ShowGestor()"><li>Gestionar Información</li></a>
                 <a href="#" id="AddPersonas" onclick="showAddPersonas()"><li>Añadir personas</li></a>
                 <a href='#' onclick="showAsignaturas()" id="addAsignatura"><li>Añadir Asignaturas</li></a>
                 <a href="#" onclick="showCurso()"><li>Añadir Cursos</li></a>
@@ -33,14 +33,40 @@
                 <br>
                 <br>
                 <center>
-                    <button>Gestionar personas</button>
-                    <br>
+                    <button onclick="ShowAllPeople()">Gestionar personas</button>
+                    
                     <button>Gestionar Asignaturas</button>
-                    <br>
                     <button>Gestionar Cursos</button>
-                    <br>
                     <button>Gestionar Programas</button>
                 </center>
+                <!--Gestionar personas-->
+            <div id="gestorPersonas" class="hidden">
+                <h1>Alumnos</h1>
+                <table id="tableAlumnos">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>CURP</th>
+                        <th>Cursos matriculados</th>
+                        <th>Promedio</th>
+                        <th>Usuario</th>
+                        <!--Restablecer contraseña, dar de baja a alumno-->
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </table>
+                <h1>Maestros</h1>
+                <table id="tableMaestros">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>CURP</th>
+                        <th>Asignaturas impartidas</th>
+                        <th>Usuario</th>
+                        <!--Restablecer contraseña, dar de baja a alumno-->
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </table>
+            </div>
             </div>
             <!--Persona-->
            <div id="personas" class="hidden">
@@ -96,8 +122,6 @@
                         <input type="submit" value="Registrar">
                     </form>
                 </div>
-            </div>
-            <div id="responses">
             </div>
         </div>
         <footer>

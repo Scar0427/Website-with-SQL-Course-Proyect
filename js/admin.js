@@ -3,6 +3,10 @@ let asignaturas = document.getElementById('asignatura');
 let cursos = document.getElementById('curso');
 let programa = document.getElementById('programa');
 let tel = document.getElementById('tel');
+let gestorPersonas = document.getElementById('gestorPersonas');
+let tableAlumnos= document.getElementById('tableAlumnos');
+let tableMaestros = document.getElementById('tableMaestros');
+let mainGestor = document.getElementById('mainGestor');
 
 $(document).ready(function(){
     console.log("Working jQuery");
@@ -21,7 +25,7 @@ $(document).ready(function(){
         e.preventDefault()
         $.ajax({
             url: 'php/admin.php',
-            data: {"operation": "teachers"},
+            data: {"action": "teachers"},
             type: 'POST',
             success: function(response){
                 console.log(response);
@@ -49,7 +53,7 @@ $(document).ready(function(){
         $('#asig').html("");
         $.ajax({
             url: 'php/admin.php',
-            data: {"operation": "asignatura"},
+            data: {"action": "asignatura"},
             type: 'POST',
             success: function(response){
                 console.log(response);
@@ -70,7 +74,7 @@ $(document).ready(function(){
 
         $.ajax({
             url: 'php/admin.php',
-            data: {"operation": "curso"},
+            data: {"action": "curso"},
             type: 'POST',
             success: function(response2){
                 console.log(response2);
@@ -194,6 +198,7 @@ asignaturas.click(showAsignaturas());*/
 asignaturas.click(showAsignaturas());*/
 
 function showAddPersonas(){
+    mainGestor.setAttribute('class', 'hidden');
     console.log("Click en personas");
     personas.setAttribute('class', 'show');
     asignaturas.setAttribute('class', 'hidden');
@@ -202,6 +207,7 @@ function showAddPersonas(){
 }
 
 function showAsignaturas(){
+    mainGestor.setAttribute('class', 'hidden');
     personas.setAttribute('class', 'hidden');
     asignaturas.setAttribute('class', 'show');
     cursos.setAttribute('class', 'hidden');
@@ -209,6 +215,7 @@ function showAsignaturas(){
 }
 
 function showCurso(){
+    mainGestor.setAttribute('class', 'hidden');
     personas.setAttribute('class', 'hidden');
     asignaturas.setAttribute('class', 'hidden');
     cursos.setAttribute('class', 'show');
@@ -216,8 +223,103 @@ function showCurso(){
 }
 
 function showPrograma(){
+    mainGestor.setAttribute('class', 'hidden');
     personas.setAttribute('class', 'hidden');
     asignaturas.setAttribute('class', 'hidden');
     cursos.setAttribute('class', 'hidden');
     programa.setAttribute('class','show');
+}
+
+//Gestor buttons
+function ShowGestor(){
+    mainGestor.setAttribute('class', 'show');
+    personas.setAttribute('class', 'hidden');
+    asignaturas.setAttribute('class', 'hidden');
+    cursos.setAttribute('class', 'hidden');
+    programa.setAttribute('class','hidden');
+    gestorPersonas.setAttribute('class', 'hidden');
+}
+
+function ShowAllPeople(){
+    gestorPersonas.setAttribute('class', 'show');
+    //Dos solicitudes AJAX, una para alumnos, y otra para maestros
+    $.ajax({
+        url: 'php/admin.php',
+        data: {'action': 'getAlumnos'},
+        type: 'POST',
+        success: function(response){
+            var data = "";
+            let finalResponse = JSON.parse(response);
+            finalResponse.forEach(element=>{
+                var reset = `<button onclick="ResetPassword('${element.user}')">Reestablecer Contraseña</button>`;
+                if(element.user == "No ha creado su cuenta"){
+                    reset = "No tiene cuenta";
+                }
+                data += `<tr><td>${element.nombre}</td><td>${element.curp}</td><td>${element.cursos}</td><td>${parseFloat(element.promedio).toFixed(2)}</td><td>${element.user}</td>
+                <td>${reset}</td><td><button onclick="DeleteAlumn('${element.curp}')">Eliminar alumno</button></td></tr>`;
+            })
+            tableAlumnos.innerHTML = `<tr><th>Nombre</th><th>CURP</th><th>Cursos matriculados</th><th>Promedio</th><th>Usuario</th><!--Restablecer contraseña, dar de baja a alumno--><th></th>
+            <th></th></tr> ${data}`;
+        }
+    });
+
+    $.ajax({
+        url: 'php/admin.php',
+        data: {'action': 'getProfesores'},
+        type: 'POST',
+        success: function(response){
+            var data = "";
+            let finalResponse = JSON.parse(response);
+            finalResponse.forEach(element=>{
+                var reset = `<button onclick="ResetPassword('${element.user}')">Reestablecer Contraseña</button>`;
+                if(element.user == "No ha creado su cuenta"){
+                    reset = "No tiene cuenta";
+                }
+                data += `<tr><td>${element.nombre}</td><td>${element.curp}</td><td>${element.asig}</td><td>${element.user}</td>
+                <td>${reset}</td><td><button onclick="DeleteTeacher('${element.curp}')">Eliminar profesor</button></td></tr>`;
+            })
+            tableMaestros.innerHTML = `<tr><th>Nombre</th><th>CURP</th><th>Asignaturas impartidas</th><th>Usuario</th><th></th><th></th></tr> ${data}`;
+        }
+    })
+}
+
+function ResetPassword(user){
+    if(confirm("¿Desea restablecer la contraseña del usuario " + user + "?")){
+        $.ajax({
+            url: 'php/admin.php',
+            data: {'action':'changePass', 'user': user},
+            type: 'POST',
+            success: function(response){
+                alert(response);
+            }
+        })
+    }
+}
+
+function DeleteAlumn(curp){
+    if(confirm("Eliminar un alumno eliminára toda la información relacionada, como notas, matriculas, etc. ¿Esta seguro de que desea continuar?")){
+        $.ajax({
+            url: 'php/admin.php',
+            data: {'action':'deleteUser', 'curp': curp, 'tipo':'alumno'},
+            type: 'POST',
+            success: function(response){
+                alert(response);
+                ShowAllPeople();
+            }
+        })
+    }
+}
+
+function DeleteTeacher(curp){
+    if(confirm("Eliminar un profesor eliminará toda la información relacionada, como asignaturas, programas, etc. ¿Esta seguro de que desea continuar?")){
+        $.ajax({
+            url: 'php/admin.php',
+            data: {'action':'deleteUser', 'curp': curp, 'tipo':'profesor'},
+            type: 'POST',
+            success: function(response){
+                alert(response);
+                ShowAllPeople();
+            }
+        })
+    }
 }
