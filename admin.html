@@ -17,13 +17,31 @@
             </div>
             
             <ul id="upButtons">
+                <a href='#'><li>Gestionar Información</li></a>
                 <a href="#" id="AddPersonas" onclick="showAddPersonas()"><li>Añadir personas</li></a>
                 <a href='#' onclick="showAsignaturas()" id="addAsignatura"><li>Añadir Asignaturas</li></a>
                 <a href="#" onclick="showCurso()"><li>Añadir Cursos</li></a>
                 <a href='#' onclick="showPrograma()" id="addProgram"><li>Añadir Programa</li></a>
+                <a href='login.html'><li>Cerrar sesión</li></a>
             </ul>
         </header>
         <div id="content">
+            <div id="mainGestor" class="show">
+                <h1>Hola Administrador</h1>
+                <h2>Si desea añadir nueva información a la base de datos, use los botones de la barra de navegación.</h2>
+                <h2>Si desea ver, y gestionar la información existente use los botones abajo</h2>
+                <br>
+                <br>
+                <center>
+                    <button>Gestionar personas</button>
+                    <br>
+                    <button>Gestionar Asignaturas</button>
+                    <br>
+                    <button>Gestionar Cursos</button>
+                    <br>
+                    <button>Gestionar Programas</button>
+                </center>
+            </div>
             <!--Persona-->
            <div id="personas" class="hidden">
                <div id="formElement">

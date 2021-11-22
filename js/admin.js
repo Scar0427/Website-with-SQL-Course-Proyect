@@ -28,7 +28,7 @@ $(document).ready(function(){
                 let finalResponse = JSON.parse(response);
                     if(finalResponse.code == 2){
                         console.log("ERROR");
-                        $('#responses').html(finalResponse.result);
+                        alert(finalResponse.result);
                     }
                     else{
                         console.log("Obtención de datos correcta");
@@ -56,7 +56,7 @@ $(document).ready(function(){
                 let finalResponse = JSON.parse(response);
                     if(finalResponse.code == 2){
                         console.log("ERROR");
-                        $('#responses').html(finalResponse.result);
+                        alert(finalResponse.result);
                     }
                     else{
                         console.log("Obtención de datos correcta");
@@ -77,7 +77,7 @@ $(document).ready(function(){
                 let finalResponse2 = JSON.parse(response2);
                     if(finalResponse2.code == 2){
                         console.log("ERROR");
-                        $('#responses').html(finalResponse2.result);
+                        alert(finalResponse2.result);
                     }
                     else{
                         console.log("Obtención de datos correcta");
@@ -103,11 +103,11 @@ $(document).ready(function(){
                     let finalResponse = JSON.parse(response);
                     if(finalResponse.code == 2){
                         console.log("ERROR");
-                        $('#responses').html(finalResponse.result);
+                        alert(finalResponse.result);
                     }
                     else{
                         console.log("registro exitoso");
-                        $('#responses').html(finalResponse.result);
+                        alert(finalResponse.result);
                     }
                 }
             }
@@ -127,11 +127,11 @@ $(document).ready(function(){
                     let finalResponse = JSON.parse(response);
                     if(finalResponse.code == 2){
                         console.log("ERROR");
-                        $('#responses').html(finalResponse.result);
+                        alert(finalResponse.result);
                     }
                     else{
                         console.log("registro exitoso");
-                        $('#responses').html(finalResponse.result);
+                        alert(finalResponse.result);
                     }
                 }
             }
@@ -151,11 +151,11 @@ $(document).ready(function(){
                     let finalResponse = JSON.parse(response);
                     if(finalResponse.code == 2){
                         console.log("ERROR");
-                        $('#responses').html(finalResponse.result);
+                        alert(finalResponse.result);
                     }
                     else{
                         console.log("registro exitoso");
-                        $('#responses').html(finalResponse.result);
+                        alert(finalResponse.result);
                     }
                 }
             }
@@ -175,11 +175,11 @@ $(document).ready(function(){
                     let finalResponse = JSON.parse(response);
                     if(finalResponse.code == 2){
                         console.log("ERROR");
-                        $('#responses').html(finalResponse.result);
+                        alert(finalResponse.result);
                     }
                     else{
                         console.log("registro exitoso");
-                        $('#responses').html(finalResponse.result);
+                        alert(finalResponse.result);
                     }
                 }
             }

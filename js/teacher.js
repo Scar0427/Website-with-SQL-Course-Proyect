@@ -63,13 +63,17 @@ function ShowPrograms(buttonValue){
             var data = "";
             finalResponse.forEach(element=>{
                 if(element.disponible <= 0){
-                    data +=  `<tr><td>${element.programa}</td><td>${element.curso}</td><td>${element.matriculaTotal}</td><td>${element.matriculados}</td><td>${element.disponible}</td><td>
+                    data += `<tr><td>${element.programa}</td><td>${element.curso}</td><td>${element.matriculaTotal}</td><td>${element.matriculados}</td><td>${element.disponible}</td><td>
                     No hay matrícula</td><td><button type="button" onClick="SendScores(${element.id})">Subir calificaciones</button></td></tr>`;
+                }
+                else if(element.matriculados == '0'){
+                    data +=  `<tr><td>${element.programa}</td><td>${element.curso}</td><td>${element.matriculaTotal}</td><td>${element.matriculados}</td><td>${element.disponible}</td><td><button type="button"
+                    onClick="AddAlumnos(${element.id})">Añadir alumnos</button></td><td>No se pueden subir calificaciones</td></tr>`;
                 }
                 else{
                     data +=  `<tr><td>${element.programa}</td><td>${element.curso}</td><td>${element.matriculaTotal}</td><td>${element.matriculados}</td><td>${element.disponible}</td><td><button type="button"
                     onClick="AddAlumnos(${element.id})">Añadir alumnos</button></td><td><button type="button" onClick="SendScores(${element.id})">Subir calificaciones</button></td></tr>`;
-                } 
+                }        
             })
             if(data != ""){
                 programas.innerHTML = "<button type='button' onclick='ReturnToCursos()'>Regresar a Mis Cursos</button><h1>Programas de "+finalResponse[0].asignatura+"</h1><table><tr><th>Programa</th><th>Curso Escolar</th><th>Matrícula Máxima</th><th>Matriculados</th><th>Matrícula disponible</th><th></th><th></th></tr>" + data + "</table>";
@@ -116,6 +120,7 @@ function AddAlumnos(programID){
     cursosView.classList = "hidden";
     programas.classList = "hidden";
     editProgram.classList = "show";
+    $('#programEdit').html(`<button type="button" onclick="ReturnToPrograms()">Regresar a Programas</button>`);
     //Obtener los datos de los alumnos (El server debe eliminar los ya matriculados)
     console.log(programID);
     $.ajax({
@@ -138,10 +143,47 @@ function AddAlumnos(programID){
 }
 
 function SendScores(programID){
+    $('#programEdit').html(`<button type="button" onclick="ReturnToPrograms()">Regresar a Programas</button>`);
     cursosView.classList = "hidden";
     programas.classList = "hidden";
     editProgram.classList = "show";
     console.log(programID);
+    //Obtener todos los alumnos matriculados y su respectiva calificacion
+    $.ajax({
+        url: 'php/teacher.php',
+        data: {'action':'getNotes', 'program_id':programID},
+        type: 'POST',
+        success: function(response){
+            console.log(response);
+            var data = "";
+            let finalResponse = JSON.parse(response);
+            finalResponse.forEach(element =>{
+                var selector = `<select id='note' name='${element.curp}'>`;
+                if(element.nota == 'NULL'){
+                    selector += "<option value='null' selected>Sin calificar</option>";
+                }
+                else{
+                    selector += "<option value='null'>Sin calificar</option>";
+                }
+                for(var i = 0; i <= 10; i++){
+                    if(element.nota == i){
+                        selector += `<option value='${i}' selected>${i}</option>`;
+                    }else{
+                        selector += `<option value='${i}'>${i}</option>`;
+                    }
+                }
+                selector += "</select>";
+
+                data += `<tr><td>${element.name}</td><td>${element.curp}</td><td>${selector}</td></tr>`;
+            })
+
+            if(data != null){
+                $('#programEdit').html(`<button type="button" onclick="ReturnToPrograms()">Regresar a Programas</button><div><h1>Subir notas de ${finalResponse[0].asig}</h1><form onsubmit="return SubmitScoresSubmit()" method="post" id="sendScores">
+                 <table><tr><th>Nombre del alumno</th><th>CURP</th><th>Nota</th></tr>${data}</table><input type="submit" value="Subir calificaciones" onclick='SubmitScores()'><input type="hidden" name="action" value="uploadScores">
+                 <input type="hidden" name="programID" value="${programID}"></form></div>`);
+            }
+        }                              
+    })
 }
 
 function ReturnToPrograms(){ 
@@ -159,8 +201,12 @@ function ReturnToPrograms(){
             var data = "";
             finalResponse.forEach(element=>{
                 if(element.disponible <= 0){
-                    data +=  `<tr><td>${element.programa}</td><td>${element.curso}</td><td>${element.matriculaTotal}</td><td>${element.matriculados}</td><td>${element.disponible}</td><td>
+                    data += `<tr><td>${element.programa}</td><td>${element.curso}</td><td>${element.matriculaTotal}</td><td>${element.matriculados}</td><td>${element.disponible}</td><td>
                     No hay matrícula</td><td><button type="button" onClick="SendScores(${element.id})">Subir calificaciones</button></td></tr>`;
+                }
+                else if(element.matriculados == '0'){
+                    data +=  `<tr><td>${element.programa}</td><td>${element.curso}</td><td>${element.matriculaTotal}</td><td>${element.matriculados}</td><td>${element.disponible}</td><td><button type="button"
+                    onClick="AddAlumnos(${element.id})">Añadir alumnos</button></td><td>No se pueden subir calificaciones</td></tr>`;
                 }
                 else{
                     data +=  `<tr><td>${element.programa}</td><td>${element.curso}</td><td>${element.matriculaTotal}</td><td>${element.matriculados}</td><td>${element.disponible}</td><td><button type="button"
@@ -202,4 +248,32 @@ function SolitudeOfNewStudents(){
             alert(response);
         }
     })
+}
+
+function SubmitScoresSubmit(){
+    return false;
+}
+
+function SubmitScores(){
+    var todosCalificados = true;
+    //Primero necesito obtener si todos los alumnos se calificaron
+    $('select').each(function() {
+        if(this.value == 'null'){
+            todosCalificados = false;
+        }
+    })
+    if(todosCalificados == false){
+        alert("Se necesitan calificar a todos los alumnos para continuar");
+    }
+    else{
+        ReturnToPrograms();
+        $.ajax({
+            url: 'php/teacher.php',
+            data: $('#sendScores').serialize(),
+            type: 'POST',
+            success: function(response){
+                alert(response);
+            }
+        })
+    }
 }

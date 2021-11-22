@@ -18,6 +18,12 @@
             case 'addAlumnos':
                 AddAlumnos();
                 break;
+            case 'getNotes':
+                GetAlumnScores();
+                break;
+            case 'uploadScores':
+                UploadScores();
+                break;
         }
         return;
     }
@@ -157,6 +163,60 @@
             }
         }
         echo "Se registraron $alumnosRegistradosOK alumnos";
+        CloseConnection($connection);
+    }
+
+    function GetAlumnScores(){
+        //Hay que obtener todas las matriculas al respectivo programID
+        $connection = OpenConnection();
+        $json = array();
+
+        $programID = $_POST['program_id'];
+        $query = "SELECT * FROM matricula WHERE ID_PROGRAMA = '$programID'";
+        $result = mysqli_query($connection, $query);
+        //Obteniendo el nombre de la asignatura
+        $query = "SELECT id_asignatura FROM programa WHERE id_programa = '$programID'";
+        $asig = mysqli_query($connection, $query);
+        $asig = mysqli_fetch_row($asig);
+        $query = "SELECT Nombre FROM asignaturas WHERE id_asignatura = '{$asig[0]}'";
+        $asigName = mysqli_query($connection, $query);
+        $asigName = mysqli_fetch_row($asigName);
+
+        //Ahora utilizamos un ciclo para enviar la informacion de los alumnos y las notas
+        while($matricula = mysqli_fetch_row($result)){
+            //Obteniendo nombre del alumno
+            $query = "SELECT * FROM alumnos WHERE CURP = '{$matricula[0]}'";
+            $alumn = mysqli_query($connection, $query);
+            $alumn = mysqli_fetch_row($alumn);
+            $json[] = array('name'=>$alumn[1] . " " . $alumn[2] . " " . $alumn[3], 'nota'=> $matricula[2], 'curp'=>$matricula[0], 'asig'=>$asigName);
+        }
+        $jsonString = json_encode($json);
+        echo $jsonString;
+        CloseConnection($connection);
+    }
+
+    function UploadScores(){
+        $connection = OpenConnection();
+
+        $idPrograma = $_POST['programID'];
+        $alumnosCalificados = 0;
+        //Primero, obtenemos los CURPS de los alumnos matriculados
+        $query = "SELECT CURP FROM matricula WHERE ID_PROGRAMA = '$idPrograma'";
+        $result = mysqli_query($connection, $query);
+        while($curp = mysqli_fetch_row($result)){
+            //Ahora solo hacemos Update en el SQL
+            $query = "UPDATE matricula SET CALIFICACION = '{$_POST[$curp[0]]}' WHERE ID_PROGRAMA = '$idPrograma' AND CURP = '{$curp[0]}'";
+            $update = mysqli_query($connection, $query);
+            if($update == true){
+                $alumnosCalificados++;
+            }
+            else{
+                echo mysqli_error($connection) . "<br>";
+            }
+        }
+
+        echo "Se subieron $alumnosCalificados calificaciones";
+
         CloseConnection($connection);
     }
 ?>

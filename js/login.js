@@ -1,3 +1,6 @@
+let register = document.getElementById("registerForm");
+let login = document.getElementById("loginForm");
+
 $(document).ready(function(){
     console.log("Working jQuery");
 
@@ -51,4 +54,17 @@ $(document).ready(function(){
         })
     })
 
+    $('#register').submit(e =>{
+        alert("Intento de Registrar");
+    })
 });
+
+function ShowRegisterForm(){
+    login.classList = "hidden";
+    register.classList = "show";
+}
+
+function ReturnToLogin(){
+    login.classList = "show";
+    register.classList = "hidden";
+}

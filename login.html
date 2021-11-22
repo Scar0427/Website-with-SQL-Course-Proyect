@@ -25,18 +25,34 @@
                 </ul>
             </header>
         <div id="content">
-            <div id="formElement">
-                <h1>Inicio de sesión</h1>
-                <form action="" method="post" id="login">
-                    Usuario: <input type="text" name="user"> <br>
-                    Password: <input type="password" name="pass"> <br>
-                    <input type="submit" value="Iniciar sesión" name="submit">
-                    <input type="hidden" name="action" value="login">
-                </form>
-                <br>
-                <div id="errors">
-                    
+            <div id="loginForm" class="show">
+                <div id="formElement">
+                    <h1>Inicio de sesión</h1>
+                    <form action="" method="post" id="login">
+                        Usuario: <input type="text" name="user"> <br>
+                        Password: <input type="password" name="pass"> <br>
+                        <input type="submit" value="Iniciar sesión" name="submit">
+                        <input type="hidden" name="action" value="login">
+                    </form>
+                    <br>
+                    <div id="errors">
+                        
+                    </div>
                 </div>
+                <h2 style="font-size: 20px;">¿Eres alumno o maestro y no tienes cuenta?</h2><center><button onclick="ShowRegisterForm()" style="font-size: 15px; font-weight: bold;">Créala aquí</button></center>
+            </div>
+            <div id="registerForm" class="hidden">
+                <div id="formElement">
+                    <h1>Registro de Usuario</h1>
+                    <form onsubmit="return false" method="post" id="register">
+                        CURP: <input type="text" name="curp"><br>
+                        Usuario: <input type="text" name="user"> <br>
+                        Password: <input type="password" name="pass"> <br>
+                        <input type="submit" value="Registrar usuario" name="submit">
+                        <input type="hidden" name="action" value="register">
+                    </form>
+                </div>
+                <center><button onclick="ReturnToLogin()" style="font-size: 15px; font-weight: bold;">Regresar a Iniciar Sesión</button></center>
             </div>
         </div>
 

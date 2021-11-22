@@ -9,6 +9,9 @@
             case "login":
                 CheckLogin();
                 break;
+            case 'register':
+                CreateUser();
+                break;
         }
     }
 
@@ -70,4 +73,16 @@
         echo $jsonString;
     }   
     
+    function CreateUser(){
+        $connection = OpenConnection();
+
+        //Primero hay que hacer una verificacion de seguridad
+        //1-¿Es alumno?
+        //2-¿Es profesor?
+        //3-¿No tiene cuenta?
+        //4-¿El usuario no esta en uso?
+        //Si estas tres preguntas son verdaderas, se registra el usuario
+
+        CloseConnection($connection);
+    }
 ?>

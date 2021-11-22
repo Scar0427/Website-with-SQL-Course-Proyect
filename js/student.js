@@ -26,7 +26,7 @@ $('document').ready(function() {
                         }else{
                             dataTable += `<tr><td>${element.asignatura}</td><td>${element.curso}</td><td>${element.profesor}</td><td>${element.nota}</td></tr>`;
                             asignaturasConNota++;
-                            totalNotas += element.nota;
+                            totalNotas += parseInt(element.nota);
                         }
                     }
                 });

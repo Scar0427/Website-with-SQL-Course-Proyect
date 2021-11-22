@@ -99,7 +99,7 @@ if(mysqli_connect_error()){
             $asignatura = $_POST["nombreAsignatura"];
             $curp = $_POST["curp"];
 
-            $query = "INSERT INTO asignaturas VALUES(DEFAULT,'$matricula', '$asignatura', NULL, '$curp')";
+            $query = "INSERT INTO asignaturas VALUES(DEFAULT,'$matricula', '$asignatura', '$curp')";
             $result = mysqli_query($connection, $query);
 
             if($result == true){
@@ -141,7 +141,7 @@ if(mysqli_connect_error()){
             $programa = $_POST['nombre'];
             $duracion = $_POST['duracion'];
 
-            $query = "INSERT INTO matricula VALUES($asignatura, '$curso', '$programa', '$duracion')";
+            $query = "INSERT INTO programa VALUES(DEFAULT, '$asignatura', '$curso', '$programa', '$duracion')";
             $result = mysqli_query($connection, $query);
 
             if($result == true){
