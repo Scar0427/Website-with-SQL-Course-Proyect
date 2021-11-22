@@ -35,7 +35,7 @@ $('document').ready(function() {
                     document.getElementById("matricula").innerHTML = "<table><tr><th>Asignatura</th><th>Curso Escolar</th><th>Profesor</th><th>Nota</th></tr>" + dataTable +"</table>";
                 }
                 if(asignaturasConNota > 0){
-                    $("#promedio").html(`Tu promedio general es: ${totalNotas/asignaturasConNota}`);
+                    $("#promedio").html(`Tu promedio general es: ${(totalNotas/asignaturasConNota).toFixed(2)}`);
                 }else{
                     $("#promedio").html("No cuentas con notas para obtener tu promedio");
                 }

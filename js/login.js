@@ -55,7 +55,20 @@ $(document).ready(function(){
     })
 
     $('#register').submit(e =>{
-        alert("Intento de Registrar");
+        e.preventDefault();
+        if($('#register [name="user"]').val().trim().length == 0 || $('#register [name="pass"]').val().trim().length == 0){
+            alert("Los campos usuario o contraseña no pueden estar en blanco");
+        }
+        else{
+            $.ajax({
+                url: 'php/login.php',
+                data: $('#register').serialize(),
+                type: 'POST',
+                success: function(response){
+                    alert(response);
+                }
+            })
+        }
     })
 });
 

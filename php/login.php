@@ -81,7 +81,72 @@
         //2-¿Es profesor?
         //3-¿No tiene cuenta?
         //4-¿El usuario no esta en uso?
-        //Si estas tres preguntas son verdaderas, se registra el usuario
+        //Si estas preguntas son verdaderas, se registra el usuario
+        $curp = $_POST['curp'];
+        $user = $_POST['user'];
+        $password = $_POST['pass'];
+        $query = "SELECT * FROM alumnos WHERE CURP = '$curp'";
+        $result = mysqli_query($connection, $query);
+        if(mysqli_num_rows($result) > 0){
+            //Es alumno
+            $query = "SELECT * FROM login WHERE CURP_alumno = '$curp'";
+            $result= mysqli_query($connection, $query);
+            if(mysqli_num_rows($result) <= 0){
+                //No tiene cuenta de usuario
+                $query = "SELECT * FROM login WHERE user = '$user'";
+                $result = mysqli_query($connection, $query);
+                if(mysqli_num_rows($result) == 0){
+                    //Se puede crear la cuenta de alumno
+                    $query = "INSERT INTO login VALUES('$user', '$password', 'alumno', '$curp', NULL)";
+                    $result = mysqli_query($connection, $query);
+                    if($result == true){
+                        echo "Usuario creado exitosamente. Ya puede iniciar sesión";
+                    }else{
+                        echo "Ocurrió un error: " . mysqli_error($connection);
+                    }
+                }
+                else{
+                    echo "El nombre de usuario ya esta en uso. Por favor, escriba otro.";
+                }
+            }
+            else{
+                echo "El CURP introducido ya cuenta con un usuario. Puede iniciar sesión. Si cree que es un error, comuniquese con un administrador";
+            }
+        }
+        else{
+            $query = "SELECT * FROM profesores WHERE CURP = '$curp'";
+            $result = mysqli_query($connection, $query);
+            if(mysqli_num_rows($result) > 0){
+                //Es profesor
+                $query = "SELECT * FROM login WHERE CURP_profesor = '$curp'";
+                $result = mysqli_query($connection, $query);
+                if(mysqli_num_rows($result) == 0){
+                    //No tiene cuenta de usuario
+                    $query = "SELECT * FROM login WHERE user = '$user'";
+                    $result = mysqli_query($connection, $query);
+                    if(mysqli_num_rows($result) == 0){
+                        //Se puede crear la cuenta de profesor
+                        $query = "INSERT INTO login VALUES('$user', '$password', 'profesor', NULL, '$curp')";
+                        $result = mysqli_query($connection, $query);
+                        if($result == true){
+                            echo "Usuario creado exitosamente. Ya puede iniciar sesión";
+                        }else{
+                            echo "Ocurrió un error: " . mysqli_error($connection);
+                        }
+                    }
+                    else{
+                        echo "El nombre de usuario ya esta en uso. Por favor, escriba otro.";
+                    }
+                }
+                else{
+                    echo "El CURP introducido ya cuenta con un usuario. Puede iniciar sesión. Si cree que es un error, comuniquese con un administrador";
+                }
+            }
+            else{
+                //No existe el CURP
+                echo "El CURP introducido no existe. Por favor, verífiquelo. Si esta bien, comuniquese con un administrador";
+            }
+        }
 
         CloseConnection($connection);
     }
