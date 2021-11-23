@@ -25,6 +25,18 @@
             case 'changePass':
                 ChangePassWord();
                 break;
+            case 'getAsignaturas';
+                GetAllAsig();
+                break;
+            case 'deleteAsig':
+                DeleteAsig();
+                break;
+            case 'getCourses':
+                GetAllCourses();
+                break;
+            case 'deleteCourse':
+                DeleteCourse();
+                break;
         }
     }else if(isset($_POST['state'])){
         switch($_POST['state']){
@@ -320,6 +332,77 @@
         }
         else{
             echo "Ocurrió un error al reestablecer la contraseña: " . mysqli_error($connection);
+        }
+
+        CloseConnection($connection);
+    }
+
+    function GetAllAsig(){
+        $connection = OpenConnection();
+
+        $json = array();
+        $query = "SELECT * FROM asignaturas";
+        $result = mysqli_query($connection, $query);
+        while($asig = mysqli_fetch_row($result)){
+            $query = "SELECT * FROM profesores WHERE CURP = '{$asig[3]}'";
+            $profe = mysqli_query($connection, $query);
+            $profe = mysqli_fetch_row($profe);
+            $profeNombre = $profe[1] . " " . $profe[2] . " " . $profe[3];
+            $json[] = array('nombre'=>$asig[2], 'id'=>$asig[0], 'matri'=>$asig[1], 'profe'=> $profeNombre, 'curp'=>$asig[3]);
+        }   
+        $jsonString = json_encode($json);
+        echo $jsonString;
+
+        CloseConnection($connection);
+    }
+
+    function DeleteAsig(){
+        $connection = OpenConnection();
+
+        $id = $_POST['id'];
+        $query = "DELETE FROM asignaturas WHERE id_asignatura = '$id'";
+        $result = mysqli_query($connection, $query);
+        if($result == true){
+            echo "Asignatura borrada exitosamente";
+        }
+        else{
+            echo "Ocurrió un error: " . mysqli_error($connection);
+        }
+
+        CloseConnection($connection);
+    }
+
+    //Cursos
+    function GetAllCourses(){
+        $connection = OpenConnection();
+
+        $json = array();
+        $query = "SELECT * FROM curso_escolar";
+        $result = mysqli_query($connection, $query);
+        while($curso = mysqli_fetch_row($result)){
+            $query = "SELECT * FROM programa WHERE id_curso = '{$curso[0]}'";
+            $programas = mysqli_query($connection, $query);
+            $programas = mysqli_num_rows($programas);
+
+            $json[] = array('nombre'=>$curso[1], 'id'=>$curso[0], 'duracion'=>$curso[2], 'progs'=> $programas);
+        }   
+        $jsonString = json_encode($json);
+        echo $jsonString;
+
+        CloseConnection($connection);
+    }
+
+    function DeleteCourse(){
+        $connection = OpenConnection();
+
+        $id = $_POST['id'];
+        $query = "DELETE FROM curso_escolar WHERE id_curso = '$id'";
+        $result = mysqli_query($connection, $query);
+        if($result == true){
+            echo "Curso borrado exitosamente";
+        }
+        else{
+            echo "Ocurrió un error: " . mysqli_error($connection);
         }
 
         CloseConnection($connection);

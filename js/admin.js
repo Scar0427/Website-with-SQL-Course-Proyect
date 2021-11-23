@@ -7,6 +7,10 @@ let gestorPersonas = document.getElementById('gestorPersonas');
 let tableAlumnos= document.getElementById('tableAlumnos');
 let tableMaestros = document.getElementById('tableMaestros');
 let mainGestor = document.getElementById('mainGestor');
+let gestorAsig = document.getElementById('gestorAsig');
+let tableAsig = document.getElementById('tableAsig');
+let gestorCursos = document.getElementById('gestorCursos');
+let tableCursos = document.getElementById('tableCursos');
 
 $(document).ready(function(){
     console.log("Working jQuery");
@@ -238,10 +242,13 @@ function ShowGestor(){
     cursos.setAttribute('class', 'hidden');
     programa.setAttribute('class','hidden');
     gestorPersonas.setAttribute('class', 'hidden');
+    gestorAsig.setAttribute('class', 'hidden');
 }
 
 function ShowAllPeople(){
     gestorPersonas.setAttribute('class', 'show');
+    gestorAsig.setAttribute('class', 'hidden');
+    gestorCursos.setAttribute('class', 'hidden');
     //Dos solicitudes AJAX, una para alumnos, y otra para maestros
     $.ajax({
         url: 'php/admin.php',
@@ -322,4 +329,72 @@ function DeleteTeacher(curp){
             }
         })
     }
+}
+
+function ShowAsignaturas(){
+    gestorPersonas.setAttribute('class', 'hidden');
+    gestorAsig.setAttribute('class', 'show');
+    gestorCursos.setAttribute('class', 'hidden');
+
+    $.ajax({
+        url: 'php/admin.php',
+        data: {'action':'getAsignaturas'},
+        type: 'POST',
+        success: function(response){
+            var data = "";
+            let finalResponse = JSON.parse(response);
+            finalResponse.forEach(element=>{
+                data += `<tr><td>${element.nombre}</td><td>${element.id}</td><td>${element.matri}</td><td>${element.profe}</td><td>${element.curp}</td><td><button onclick="DeleteAsig('${element.id}')">Eliminar asignatura</button></td></tr>`;
+            })
+            tableAsig.innerHTML = `<tr><th>Nombre de la Asignatura</th><th>ID de la asignatura</th><th>Matrícula máxica</th><th>Nombre del profesor</th><th>CURP del profesor</th><!--Eliminar asignatura-->
+            <th></th>${data}</tr>`;
+        }
+    })
+}
+
+function DeleteAsig(id){
+    if(confirm('Eliminar una asignatura también borra todos los programas relacionados. ¿Desea continuar?'))
+    $.ajax({
+        url: 'php/admin.php',
+        data: {'action':'deleteAsig', 'id':id},
+        type: 'POST',
+        success: function(response){
+            alert(response);
+            ShowAsignaturas();
+        }
+    })
+}
+
+//Funciones de los cursos
+function ShowAllCourses(){
+    gestorPersonas.setAttribute('class', 'hidden');
+    gestorAsig.setAttribute('class', 'hidden');
+    gestorCursos.setAttribute('class', 'show');
+
+    $.ajax({
+        url: 'php/admin.php',
+        data: {'action':'getCourses'},
+        type: 'POST',
+        success: function(response){
+            var data = "";
+            let finalResponse = JSON.parse(response);
+            finalResponse.forEach(element=>{
+                data += `<tr><td>${element.nombre}</td><td>${element.id}</td><td>${element.duracion}</td><td>${element.progs}</td><td><button onclick="DeleteCourse('${element.id}')">Eliminar curso</button></td></tr>`;
+            })
+            tableCursos.innerHTML = `<tr><th>Año de Inicio</th><th>Id del curso</th><th>Duración del curso</th><th>Programas del curso</th><th></th>${data}</tr>`;
+        }
+    })
+}
+
+function DeleteCourse(id){
+    if(confirm('Eliminar un curso también borra todos los programas y matriculas relacionados. ¿Desea continuar?'))
+    $.ajax({
+        url: 'php/admin.php',
+        data: {'action':'deleteCourse', 'id':id},
+        type: 'POST',
+        success: function(response){
+            alert(response);
+            ShowAllCourses();
+        }
+    })
 }

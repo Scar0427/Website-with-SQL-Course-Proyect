@@ -34,39 +34,65 @@
                 <br>
                 <center>
                     <button onclick="ShowAllPeople()">Gestionar personas</button>
-                    
-                    <button>Gestionar Asignaturas</button>
-                    <button>Gestionar Cursos</button>
+                    <button onclick="ShowAsignaturas()">Gestionar Asignaturas</button>
+                    <button onclick="ShowAllCourses()">Gestionar Cursos</button>
                     <button>Gestionar Programas</button>
                 </center>
                 <!--Gestionar personas-->
-            <div id="gestorPersonas" class="hidden">
-                <h1>Alumnos</h1>
-                <table id="tableAlumnos">
-                    <tr>
-                        <th>Nombre</th>
-                        <th>CURP</th>
-                        <th>Cursos matriculados</th>
-                        <th>Promedio</th>
-                        <th>Usuario</th>
-                        <!--Restablecer contraseña, dar de baja a alumno-->
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </table>
-                <h1>Maestros</h1>
-                <table id="tableMaestros">
-                    <tr>
-                        <th>Nombre</th>
-                        <th>CURP</th>
-                        <th>Asignaturas impartidas</th>
-                        <th>Usuario</th>
-                        <!--Restablecer contraseña, dar de baja a alumno-->
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </table>
-            </div>
+                <div id="gestorPersonas" class="hidden">
+                    <h1>Alumnos</h1>
+                    <table id="tableAlumnos">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>CURP</th>
+                            <th>Cursos matriculados</th>
+                            <th>Promedio</th>
+                            <th>Usuario</th>
+                            <!--Restablecer contraseña, dar de baja a alumno-->
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </table>
+                    <h1>Maestros</h1>
+                    <table id="tableMaestros">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>CURP</th>
+                            <th>Asignaturas impartidas</th>
+                            <th>Usuario</th>
+                            <!--Restablecer contraseña, dar de baja a alumno-->
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </table>
+                </div>
+                <!--Gestionar asignaturas-->
+                <div id="gestorAsig" class="hidden">
+                    <h1>Asignaturas</h1>
+                    <table id="tableAsig">
+                        <tr>
+                            <th>Nombre de la Asignatura</th>
+                            <th>ID de la asignatura</th>
+                            <th>Matrícula máxica</th>
+                            <th>Nombre del profesor</th>
+                            <th>CURP del profesor</th>
+                            <!--Eliminar asignatura-->
+                            <th></th>
+                        </tr>
+                    </table>
+                </div>
+                <div id="gestorCursos" class="hidden">
+                    <h1>Cursos escolares</h1>
+                    <table id="tableCursos">
+                        <tr>
+                            <th>Año de Inicio</th>
+                            <th>Id del curso</th>
+                            <th>Duración del curso</th>
+                            <th>Programas del curso</th>
+                            <th></th>
+                        </tr>
+                    </table>
+                </div>
             </div>
             <!--Persona-->
            <div id="personas" class="hidden">
