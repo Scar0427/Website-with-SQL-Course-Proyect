@@ -36,7 +36,7 @@
                     <button onclick="ShowAllPeople()">Gestionar personas</button>
                     <button onclick="ShowAsignaturas()">Gestionar Asignaturas</button>
                     <button onclick="ShowAllCourses()">Gestionar Cursos</button>
-                    <button>Gestionar Programas</button>
+                    <button onclick="ShowProgramas()">Gestionar Programas</button>
                 </center>
                 <!--Gestionar personas-->
                 <div id="gestorPersonas" class="hidden">
@@ -89,6 +89,20 @@
                             <th>Id del curso</th>
                             <th>Duración del curso</th>
                             <th>Programas del curso</th>
+                            <th></th>
+                        </tr>
+                    </table>
+                </div>
+                <div id="gestorProgramas" class="hidden">
+                    <h1>Programas</h1>
+                    <table id="tableProgramas">
+                        <tr>
+                            <th>Nombre del Programa</th>
+                            <th>Id del Programa</th>
+                            <th>Duración del programa</th>
+                            <th>Asignatura</th>
+                            <th>Curso escolar</th>
+                            <th>Profesor</th>
                             <th></th>
                         </tr>
                     </table>

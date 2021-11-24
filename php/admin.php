@@ -37,6 +37,12 @@
             case 'deleteCourse':
                 DeleteCourse();
                 break;
+            case 'getProgram':
+                GetAllProgramas();
+                break;
+            case 'deleteProgram':
+                DeleteProgram();
+                break;
         }
     }else if(isset($_POST['state'])){
         switch($_POST['state']){
@@ -400,6 +406,49 @@
         $result = mysqli_query($connection, $query);
         if($result == true){
             echo "Curso borrado exitosamente";
+        }
+        else{
+            echo "Ocurrió un error: " . mysqli_error($connection);
+        }
+
+        CloseConnection($connection);
+    }
+
+    //Programas
+    function GetAllProgramas(){
+        $connection = OpenConnection();
+
+        $json = array();
+        $query = "SELECT * FROM programa";
+        $result = mysqli_query($connection, $query);
+        while($program = mysqli_fetch_row($result)){
+            $query = "SELECT * FROM asignaturas WHERE id_asignatura = '{$program[1]}'";
+            $asig = mysqli_query($connection, $query);
+            $asig = mysqli_fetch_row($asig);
+            $query = "SELECT anio_inicio FROM curso_escolar WHERE id_curso = '{$program[2]}'";
+            $curso = mysqli_query($connection, $query);
+            $curso = mysqli_fetch_row($curso);
+            $query = "SELECT * FROM profesores WHERE CURP = '{$asig[3]}'";
+            $profe = mysqli_query($connection, $query);
+            $profe = mysqli_fetch_row($profe);
+            $nombreProfe = $profe[1] . " " . $profe[2] . " " . $profe[3];
+
+            $json[] = array('nombre'=>$program[3], 'id'=>$program[0], 'duracion'=>$program[4], 'asig'=> $asig[2], 'curso'=> $curso[0], 'profe'=> $nombreProfe);
+        }   
+        $jsonString = json_encode($json);
+        echo $jsonString;
+
+        CloseConnection($connection);
+    }
+
+    function DeleteProgram(){
+        $connection = OpenConnection();
+
+        $id = $_POST['id'];
+        $query = "DELETE FROM programa WHERE id_programa = '$id'";
+        $result = mysqli_query($connection, $query);
+        if($result == true){
+            echo "Programa borrado exitosamente";
         }
         else{
             echo "Ocurrió un error: " . mysqli_error($connection);
